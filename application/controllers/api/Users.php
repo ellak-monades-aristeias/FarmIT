@@ -118,4 +118,50 @@ class Users extends REST_Controller {
         }
     }
 
+    function updateinfo_post() {
+        $var_email = $this->post('email');
+        $var_name = $this->post('name');
+        $var_surname = $this->post('surname');
+        $var_tel = $this->post('tel_num');
+        
+        $arData = array();
+        
+        if ($var_name) {
+            $arData["name"] = $var_name;
+        }
+        if ($var_surname) {
+            $arData["surname"] = $var_surname;
+        }
+        if ($var_tel) {
+            $arData["tel_num"] = $var_tel;
+        }
+        
+        if (!$var_email) {
+            $this->response([
+                    'status' => FALSE,
+                    'message' => 'No valid data provided'
+                        ], REST_Controller::HTTP_BAD_REQUEST);
+        } else {
+            $user_id = $this->users_model->get_user_id_by_email($var_email);
+            if (!$user_id) {
+                $this->response([
+                    'status' => FALSE,
+                    'message' => 'No valid data provided'
+                        ], REST_Controller::HTTP_BAD_REQUEST);
+            }
+
+            if ($this->users_model->update_user($arData, $user_id)) {
+                $this->response([
+                    'status' => TRUE,
+                    'message' => 'Data updated successfully.'
+                        ], REST_Controller::HTTP_OK);
+            } else {
+                $this->response([
+                    'status' => FALSE,
+                    'message' => 'Data not updated.'
+                        ], REST_Controller::HTTP_OK);
+            }
+        }
+    }
+
 }
