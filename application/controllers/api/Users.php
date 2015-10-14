@@ -27,7 +27,7 @@ class Users extends REST_Controller {
     }
 
     function register_post() {
-        if ((!$this->post('email') || !$this->post('password') || !$this->post('name') || !$this->post('surname'))) {
+        if ((!$this->post('email') || !$this->post('password') || !$this->post('name') || !$this->post('surname') || !$this->post('tel_num'))) {
             $this->response([
                 'status' => FALSE,
                 'message' => 'You have not provided complete registration data.'
@@ -62,6 +62,7 @@ class Users extends REST_Controller {
             $data['password'] = md5($this->post('password'));
             $data['name'] = $this->post('name');
             $data['surname'] = $this->post('surname');
+            $data['tel_num'] = $this->post('tel_num');
             $addedUserId = $this->users_model->addNewUser($data);
             if (!$addedUserId) {
                 $this->response([
@@ -119,30 +120,30 @@ class Users extends REST_Controller {
     }
 
     function updateinfo_post() {
-        $var_email = $this->post('email');
-        $var_name = $this->post('name');
-        $var_surname = $this->post('surname');
-        $var_tel = $this->post('tel_num');
-        
+        $email = $this->post('email');
+        $name = $this->post('name');
+        $surname = $this->post('surname');
+        $tel = $this->post('tel_num');
+
         $arData = array();
-        
-        if ($var_name) {
+
+        if ($name) {
             $arData["name"] = $var_name;
         }
-        if ($var_surname) {
+        if ($surname) {
             $arData["surname"] = $var_surname;
         }
-        if ($var_tel) {
+        if ($tel) {
             $arData["tel_num"] = $var_tel;
         }
-        
-        if (!$var_email) {
+
+        if (!$email) {
             $this->response([
-                    'status' => FALSE,
-                    'message' => 'No valid data provided'
-                        ], REST_Controller::HTTP_BAD_REQUEST);
+                'status' => FALSE,
+                'message' => 'No valid data provided'
+                    ], REST_Controller::HTTP_BAD_REQUEST);
         } else {
-            $user_id = $this->users_model->get_user_id_by_email($var_email);
+            $user_id = $this->users_model->get_user_id_by_email($email);
             if (!$user_id) {
                 $this->response([
                     'status' => FALSE,
@@ -164,4 +165,94 @@ class Users extends REST_Controller {
         }
     }
 
+    function becomeproducer_post() {
+        $email = $this->post('email');
+        $firm = $this->post('firm');
+        $firm_desc = $this->post('firm_desc');
+        $afm = $this->post('afm');
+        $doy = $this->post('doy');
+        $occupation = $this->post('occupation');
+        $address = $this->post('address');
+        $address_no = $this->post('address_no');
+        $address_area = $this->post('address_area');
+        $address_zip_code = $this->post('address_zip_code');
+        $tel1 = $this->post('tel1');
+        $tel2 = $this->post('tel2');
+        $is_producer = $this->post('is_producer');
+        $avatar = $this->post('avatar');
+
+        if ((!$email || !$firm || !$firm_desc || !$afm || !$doy || !$occupation 
+                || !$address || !$address_no || !$address_area || !$address_zip_code 
+                || !$tel1 || !$is_producer)) {
+            $this->response([
+                'status' => FALSE,
+                'message' => 'You have not provided complete data.'
+                    ], REST_Controller::HTTP_BAD_REQUEST);
+        }
+
+        $user_id = $this->users_model->get_user_id_by_email($email);
+        $arData = array(
+            "user_id" => $user_id,
+            "firm" => $firm,
+            "firm_desc" => $firm_desc,
+            "afm" => $afm,
+            "doy" => $doy,
+            "occupation" => $occupation,
+            "address" => $address,
+            "address_no" => $address_no,
+            "address_area" => $address_area,
+            "address_zip_code" => $address_zip_code,
+            "tel1" => $tel1,
+            "is_producer" => $is_producer,
+        );
+        if ($avatar) {
+            $arData["avatar"] = $avatar;
+        }
+        if ($tel2) {
+            $arData["tel2"] = $tel2;
+        }
+        
+        $result = $this->users_model->add_new_company($arData, $user_id);
+        if($result){
+            $this->response([
+                'status' => TRUE,
+                'message' => 'New company added'
+                    ], REST_Controller::HTTP_OK);
+        } else {
+            $this->response([
+                'status' => FALSE,
+                'message' => 'Something wrong happened'
+                    ], REST_Controller::HTTP_BAD_REQUEST);
+        }
+    }
+
 }
+
+//function addproduct_post() {
+//        $email = $this->post('email');
+//        $alias = $this->post('pr_name');
+//        $street = $this->post('pr_description');
+//        $no = $this->post('pr_price');
+//        $no = $this->post('pr_unit'); //(eg. unit, kilos etc)
+//
+//        $user_id = $this->users_model->get_user_id_by_email($email);
+//        if (!$user_id) {
+//            $this->response([
+//                'status' => FALSE,
+//                'message' => 'No valid data provided'
+//                    ], REST_Controller::HTTP_BAD_REQUEST);
+//        }
+//        
+//        $resp = $this->users_model->add_product($arData, $user_id)
+//        if () {
+//            $this->response([
+//                'status' => TRUE,
+//                'message' => 'Data updated successfully.'
+//                    ], REST_Controller::HTTP_OK);
+//        } else {
+//            $this->response([
+//                'status' => FALSE,
+//                'message' => 'Data not updated.'
+//                    ], REST_Controller::HTTP_OK);
+//        }
+//    }

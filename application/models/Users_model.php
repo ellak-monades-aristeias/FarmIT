@@ -57,4 +57,29 @@ class Users_model extends CI_Model {
         }
     }
 
+    public function add_new_company($arData, $user_id) {
+        try {
+            $query = $this->db->get_where('companies', array('user_id' => $user_id));
+            if ($query->num_rows() > 0) {
+                return FALSE;
+            } else {
+                $this->db->insert('companies', $arData);
+                if ($this->db->affected_rows() == 1) {
+                    $this->db->where('users.id', $user_id);
+                    $this->db->update('users', array('is_company' => 1));
+                    return TRUE;
+                } else {
+                    return FALSE;
+                }
+            }
+        } catch (Exception $ex) {
+            log_message('info', $ex->getMessage() . 'code ' . $ex->getCode());
+            if ($ex->getCode() == 23000) { //if SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        }
+    }
+
 }
