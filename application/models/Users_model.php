@@ -82,4 +82,24 @@ class Users_model extends CI_Model {
         }
     }
 
+    public function update_product($user_id, $data, $name) {
+        $this->db->where(array('producer_id' => $user_id, 'name' => $name));
+        $this->db->update('products', $data);
+        if ($this->db->affected_rows() == 1) {
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+    }
+    
+    public function remove_product($user_id, $name) {
+        $this->db->where(array('producer_id' => $user_id, 'name' => $name));
+        $this->db->delete('products', $data);
+        if ($this->db->affected_rows() == 1) {
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+    }
+
 }

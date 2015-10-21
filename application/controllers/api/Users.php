@@ -181,9 +181,7 @@ class Users extends REST_Controller {
         $is_producer = $this->post('is_producer');
         $avatar = $this->post('avatar');
 
-        if ((!$email || !$firm || !$firm_desc || !$afm || !$doy || !$occupation 
-                || !$address || !$address_no || !$address_area || !$address_zip_code 
-                || !$tel1 || !$is_producer)) {
+        if ((!$email || !$firm || !$firm_desc || !$afm || !$doy || !$occupation || !$address || !$address_no || !$address_area || !$address_zip_code || !$tel1 || !$is_producer)) {
             $this->response([
                 'status' => FALSE,
                 'message' => 'You have not provided complete data.'
@@ -211,9 +209,9 @@ class Users extends REST_Controller {
         if ($tel2) {
             $arData["tel2"] = $tel2;
         }
-        
+
         $result = $this->users_model->add_new_company($arData, $user_id);
-        if($result){
+        if ($result) {
             $this->response([
                 'status' => TRUE,
                 'message' => 'New company added'
@@ -226,33 +224,120 @@ class Users extends REST_Controller {
         }
     }
 
-}
+    function addproduct_post() {
+        $email = $this->post('email');
+        $name = $this->post('pr_name');
+        $desc = $this->post('pr_description');
+        $price = $this->post('pr_price');
+        $unit = $this->post('pr_unit'); //(eg. unit, kilos etc)
+        $category = $this->post('category'); //(eg. unit, kilos etc)
+        $stock = $this->post('stock'); //(eg. unit, kilos etc)
 
-//function addproduct_post() {
-//        $email = $this->post('email');
-//        $alias = $this->post('pr_name');
-//        $street = $this->post('pr_description');
-//        $no = $this->post('pr_price');
-//        $no = $this->post('pr_unit'); //(eg. unit, kilos etc)
-//
-//        $user_id = $this->users_model->get_user_id_by_email($email);
-//        if (!$user_id) {
-//            $this->response([
-//                'status' => FALSE,
-//                'message' => 'No valid data provided'
-//                    ], REST_Controller::HTTP_BAD_REQUEST);
-//        }
-//        
-//        $resp = $this->users_model->add_product($arData, $user_id)
-//        if () {
-//            $this->response([
-//                'status' => TRUE,
-//                'message' => 'Data updated successfully.'
-//                    ], REST_Controller::HTTP_OK);
-//        } else {
-//            $this->response([
-//                'status' => FALSE,
-//                'message' => 'Data not updated.'
-//                    ], REST_Controller::HTTP_OK);
-//        }
-//    }
+        $user_id = $this->users_model->get_user_id_by_email($email);
+        if (!$user_id || $name || $desc || $price || $unit || $category || $stock) {
+            $this->response([
+                'status' => FALSE,
+                'message' => 'No valid data provided'
+                    ], REST_Controller::HTTP_BAD_REQUEST);
+        }
+
+        $data = array(
+            "producer_id" => $user_id,
+            "name" => $name,
+            "desc" => $desc,
+            "unit_price" => $price,
+            "unit" => $unit,
+            "category_id" => $category,
+            "stock" => $stock,
+        );
+
+        $resp = $this->users_model->add_product($data, $user_id);
+        if ($resp) {
+            $this->response([
+                'status' => TRUE,
+                'message' => 'Product was added'
+                    ], REST_Controller::HTTP_OK);
+        } else {
+            $this->response([
+                'status' => FALSE,
+                'message' => 'Product was not added'
+                    ], REST_Controller::HTTP_OK);
+        }
+    }
+    
+    function updateproduct_post() {
+        $email = $this->post('email');
+        $name = $this->post('pr_name');
+        $price = $this->post('pr_price');
+        $unit = $this->post('pr_unit');
+        $stock = $this->post('stock'); //(eg. unit, kilos etc)
+
+        $user_id = $this->users_model->get_user_id_by_email($email);
+        if (!$user_id || !$name || (!$price && !$unit && !$stock)) {
+            $this->response([
+                'status' => FALSE,
+                'message' => 'No valid data provided'
+                    ], REST_Controller::HTTP_BAD_REQUEST);
+        }
+        
+        $data = array();
+        $data["producer_id"] = $user_id;
+        $data["name"] = $name;
+        
+        if ($price) {
+            $data["unit_price"] = $price;
+        }
+        if ($unit) {
+            $data["unit"] = $unit;
+        }
+        if ($stock) {
+            $data["stock"] = $stock;
+        }
+        
+        $resp = $this->users_model->update_product($user_id, $data, $name);
+        if ($resp) {
+            $this->response([
+                'status' => TRUE,
+                'message' => 'Product info updated'
+                    ], REST_Controller::HTTP_OK);
+        } else {
+            $this->response([
+                'status' => FALSE,
+                'message' => 'Product info not updated'
+                    ], REST_Controller::HTTP_OK);
+        }
+    }
+    
+    
+    function removeproduct_post() {
+        $email = $this->post('email');
+        $name = $this->post('pr_name');
+
+        $user_id = $this->users_model->get_user_id_by_email($email);
+        if (!$user_id || !$name) {
+            $this->response([
+                'status' => FALSE,
+                'message' => 'No valid data provided'
+                    ], REST_Controller::HTTP_BAD_REQUEST);
+        }
+        
+        $data = array();
+        $data["producer_id"] = $user_id;
+        $data["name"] = $name;
+        
+        $resp = $this->users_model->remove_product($user_id, $name);
+        if ($resp) {
+            $this->response([
+                'status' => TRUE,
+                'message' => 'Product was removed'
+                    ], REST_Controller::HTTP_OK);
+        } else {
+            $this->response([
+                'status' => FALSE,
+                'message' => 'Product was not removed'
+                    ], REST_Controller::HTTP_OK);
+        }
+    }
+    
+
+}
