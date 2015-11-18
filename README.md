@@ -47,13 +47,13 @@ AngularJS, CodeIgniter
 | Εγκατάσταση και παραμετροποίηση της βάσης δεδομένων για την αποθήκευση των δεδομένων της εφαρμογής | *      |
 | Σχεδίαση και δημιουργία του σχήματος της βάσης δεδομένων στον εξυπηρετητή | *      |
 | Σύνδεση του rest server με την βάση δεδομένων για αποθήκευση όλων των δεδομένων της εφαρμογής  | https://github.com/ellak-monades-aristeias/FarmIT/blob/master/application/config/database.php      |
-| API για την εγγραφή νέων χρηστών στην εφαρμογή | https://github.com/ellak-monades-aristeias/FarmIT/application/controllers/api/Users.php      |
-| API για την είσοδο (login) των χρηστών στην εφαρμογή | https://github.com/ellak-monades-aristeias/FarmIT/application/controllers/api/Users.php      |
-| API για την ανανέωση των στοιχείων των πελατών και των παραγωγών στο σύστημα | https://github.com/ellak-monades-aristeias/FarmIT/application/controllers/api/Users.php      |
-| API για την μετατροπή ενός χρήστη σε ρόλο παραγωγού και δήλωση των απαραίτητων πεδίων στο σύστημα | https://github.com/ellak-monades-aristeias/FarmIT/application/controllers/api/Users.php      |
-| API για την καταγραφή των προϊόντων των παραγωγών στο σύστημα μαζί με τις λεπτομέριες κάθε προϊόντος | https://github.com/ellak-monades-aristeias/FarmIT/application/controllers/api/Users.php      |
-| API για την ανανέωση των λεπτομεριών (όπως τιμή, διαθέσιμη ποσότητα κλπ) των προϊόντων από τους παραγωγούς | https://github.com/ellak-monades-aristeias/FarmIT/application/controllers/api/Users.php      |
-| API για την αφαίρεση προϊόντων από το προφίλ των παραγωγών | https://github.com/ellak-monades-aristeias/FarmIT/application/controllers/api/Users.php      |
+| API για την εγγραφή νέων χρηστών στην εφαρμογή | https://github.com/ellak-monades-aristeias/FarmIT/blob/master/application/controllers/api/Users.php      |
+| API για την είσοδο (login) των χρηστών στην εφαρμογή | https://github.com/ellak-monades-aristeias/FarmIT/blob/master/application/controllers/api/Users.php      |
+| API για την ανανέωση των στοιχείων των πελατών και των παραγωγών στο σύστημα | https://github.com/ellak-monades-aristeias/FarmIT/blob/master/application/controllers/api/Users.php      |
+| API για την μετατροπή ενός χρήστη σε ρόλο παραγωγού και δήλωση των απαραίτητων πεδίων στο σύστημα | https://github.com/ellak-monades-aristeias/FarmIT/blob/master/application/controllers/api/Users.php      |
+| API για την καταγραφή των προϊόντων των παραγωγών στο σύστημα μαζί με τις λεπτομέριες κάθε προϊόντος | https://github.com/ellak-monades-aristeias/FarmIT/blob/master/application/controllers/api/Users.php      |
+| API για την ανανέωση των λεπτομεριών (όπως τιμή, διαθέσιμη ποσότητα κλπ) των προϊόντων από τους παραγωγούς | https://github.com/ellak-monades-aristeias/FarmIT/blob/master/application/controllers/api/Users.php      |
+| API για την αφαίρεση προϊόντων από το προφίλ των παραγωγών | https://github.com/ellak-monades-aristeias/FarmIT/blob/master/application/controllers/api/Users.php      |
 | API για την καταχώρηση των αιτημάτων ζήτησης των πελατών | https://github.com/ellak-monades-aristeias/FarmIT/blob/master/application/controllers/api/Offers.php      |
 | API για την καταχώρηση και επιλογής της επιθυμητής προσφοράς από τους παραγωγούς | https://github.com/ellak-monades-aristeias/FarmIT/blob/master/application/controllers/api/Offers.php      |
 \*  (για λόγους ασφαλείας δεν έχουν συμπεριληφθεί στο commit τα στοιχεία σχετικά με την βάση δεδομένων)
