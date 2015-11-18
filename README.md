@@ -20,6 +20,40 @@
 
 
 ## Σε ποίους απευθύνεται - Κοινότητες Χρηστών - Προγραμματιστών(Developers) ##
-...εδώ περιγράφετε τους δυνητικούς τελικούς χρήστες του έργου σας και τις κοινότητες χρηστών/developers που θα ενδιαφερόντουσαν να επεκτείνουν το έργο σας. ...
+Η εφαρμογή FarmIT απευθύνεται σε ανεξάρτητους παραγωγούς, λιανεμπόρους, συνεταιρισμούς, σωματεία και πρωτίστως μικρομεσαίες αγροτικές επιχειρήσεις οι οποίες επιθυμούν να πραγματοποιήσουν μόνοι τους την προώθηση των προϊόντων τους μέσω του διαδικτύου. Το FarmIT απευθύνεται επίσης σε καταναλωτές που επιθυμούν να αγοράσουν αγροτικά προϊόντα σε όσο το δυνατόν καλύτερες τιμές απευθείας απο τους παραγωγούς που τα παράγουν, χωρίς την ύπαρξη μεσαζόντων.
+
+## Κοινότητες προγραμματιστών που μπορούν να αξιοποιήσουν το FarmIT ##
+Προγραμματιστές που ενδιαφέρονται για τομείς που αφορούν την προώθηση της γεωργικής παραγωγής και ανάπτυξης, developers που αναπτύσσουν εφαρμογές αναζήτησης διαθεσιμότητας προϊόντων και εύρεσης ελάχιστης τιμής.
+
+## Τεχνολογία ##
+Web based και/ή mobile based
+## Γλώσσες ##
+PHP, Android, Javascript
+## Βιβλιοθήκες ##
+AngularJS, CodeIgniter
+
+## Εγκατάσταση ##
+Δεν είναι απαραίτητη. Η πλατοφόρμα λειτουργεί online από οποιοδήποτε web-browser/κινητή συσκευή.
+
+## Προαπαιτούμενα ##
+Δεν υπάρχουν προαπαιτούμενα προκειμένου να χρησιμοποιηθεί η πλατφόρμα FarmIT πέρα απο την τήρηση των κανόνων λειτουργίας της όπως αυτές ορίζονται απο τον εκάστοτε διαχειριστή.
 
 
+##### Πίνακας Παραδοτέων #####
+| Τίτλος        | Url           |
+| :------------- |:-------------|
+| Εγκατάσταση και παραμετροποίηση του PHP framework που θα χρησιμοποιηθεί για την backend υποδομή       | https://github.com/ellak-monades-aristeias/FarmIT/blob/master/application/config/config.php |
+| Εγκατάσταση και παραμετροποίηση του Rest server για την υποστήριξη των Rest APIs       |  https://github.com/ellak-monades-aristeias/FarmIT/blob/master/application/config/rest.php https://github.com/ellak-monades-aristeias/FarmIT/blob/master/application/libraries/REST_Controller.php      |
+| Εγκατάσταση και παραμετροποίηση της βάσης δεδομένων για την αποθήκευση των δεδομένων της εφαρμογής | *      |
+| Σχεδίαση και δημιουργία του σχήματος της βάσης δεδομένων στον εξυπηρετητή | *      |
+| Σύνδεση του rest server με την βάση δεδομένων για αποθήκευση όλων των δεδομένων της εφαρμογής  | https://github.com/ellak-monades-aristeias/FarmIT/blob/master/application/config/database.php      |
+| API για την εγγραφή νέων χρηστών στην εφαρμογή | https://github.com/ellak-monades-aristeias/FarmIT/application/controllers/api/Users.php      |
+| API για την είσοδο (login) των χρηστών στην εφαρμογή | https://github.com/ellak-monades-aristeias/FarmIT/application/controllers/api/Users.php      |
+| API για την ανανέωση των στοιχείων των πελατών και των παραγωγών στο σύστημα | https://github.com/ellak-monades-aristeias/FarmIT/application/controllers/api/Users.php      |
+| API για την μετατροπή ενός χρήστη σε ρόλο παραγωγού και δήλωση των απαραίτητων πεδίων στο σύστημα | https://github.com/ellak-monades-aristeias/FarmIT/application/controllers/api/Users.php      |
+| API για την καταγραφή των προϊόντων των παραγωγών στο σύστημα μαζί με τις λεπτομέριες κάθε προϊόντος | https://github.com/ellak-monades-aristeias/FarmIT/application/controllers/api/Users.php      |
+| API για την ανανέωση των λεπτομεριών (όπως τιμή, διαθέσιμη ποσότητα κλπ) των προϊόντων από τους παραγωγούς | https://github.com/ellak-monades-aristeias/FarmIT/application/controllers/api/Users.php      |
+| API για την αφαίρεση προϊόντων από το προφίλ των παραγωγών | https://github.com/ellak-monades-aristeias/FarmIT/application/controllers/api/Users.php      |
+| API για την καταχώρηση των αιτημάτων ζήτησης των πελατών | https://github.com/ellak-monades-aristeias/FarmIT/blob/master/application/controllers/api/Offers.php      |
+| API για την καταχώρηση και επιλογής της επιθυμητής προσφοράς από τους παραγωγούς | https://github.com/ellak-monades-aristeias/FarmIT/blob/master/application/controllers/api/Offers.php      |
+\*  (για λόγους ασφαλείας δεν έχουν συμπεριληφθεί στο commit τα στοιχεία σχετικά με την βάση δεδομένων)
